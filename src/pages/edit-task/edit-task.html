@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{task?.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Title</ion-label>
+    <ion-input [(ngModel)]="task.title" placeholder="Enter Task Title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Content</ion-label>
+    <ion-textarea [(ngModel)]="task.content" placeholder="Description"></ion-textarea>
+  </ion-item>
+
+  <button ion-button block clear (click)="updateTask(task)">Save</button>
+  <button ion-button block clear (click)="removeTask(task)">Delete</button>
+</ion-content>
