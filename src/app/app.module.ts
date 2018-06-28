@@ -13,6 +13,7 @@ import { TaskListService } from '../services/task-list.service';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Device } from '@ionic-native/device';
+import { Firebase } from '@ionic-native/firebase';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { Device } from '@ionic-native/device';
     GoogleMaps,
     Geolocation,
     Device,
+    Firebase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     TaskListService
   ]
