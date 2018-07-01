@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { Observable } from 'rxjs/Observable';
 import { Task } from '../../model/task/task.model';
@@ -17,7 +17,7 @@ export class HomePage {
 
   taskList: Observable<Task[]>
 
-  constructor(public navCtrl: NavController, private taskListService: TaskListService, private device: Device, private firebase: Firebase) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private taskListService: TaskListService, private device: Device, private firebase: Firebase) {
     this.firebase.getToken()
   .then(token =>  this.taskListService.addToken(token)) // save the token server-side and use it to push notifications to this device
   .catch(error => console.error('Error getting token', error));
@@ -32,4 +32,39 @@ export class HomePage {
         }))
       });
   }
+
+
+
+
+  deleteTask(task, name) {
+
+    console.log(task);
+    console.log(name);
+    let confirm = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      message: 'Do you want to delete Task ?? <br><strong>Name:</strong>&nbsp;' + name + '&nbsp;',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.confirmDeleteTask(task);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+
+  confirmDeleteTask(task: Task){
+    this.taskListService.removeTask(task).then(() => {
+      console.log("Task Deleted");
+    })
+  }
+
 }

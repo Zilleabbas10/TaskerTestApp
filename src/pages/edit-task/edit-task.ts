@@ -31,9 +31,9 @@ export class EditTaskPage {
     })
   }
 
-  removeTask(task: Task) {
-    this.taskListService.removeTask(task).then(() => {
-      this.navCtrl.setRoot('HomePage');
-    })
-  }
+  // removeTask(task: Task) {
+  //   this.taskListService.removeTask(task).then(() => {
+  //     this.navCtrl.setRoot('HomePage');
+  //   })
+  // }
 }

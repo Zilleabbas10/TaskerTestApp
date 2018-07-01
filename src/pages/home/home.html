@@ -1,15 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
+  <ion-navbar color="header">
+    <ion-title text-center>
       Tasks App
     </ion-title>
 
     <ion-buttons end>
-      <button navPush="AddTaskPage" ion-button>
+<!--       <button navPush="AddTaskPage" ion-button>
         <ion-icon name="add"></ion-icon>
-      </button>
+      </button> -->
       <button navPush="MapPage" ion-button>
-        <ion-icon name="navigate"></ion-icon>
+        <ion-icon name="ios-map-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -17,13 +17,40 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-list-header>
+<!--     <ion-list-header text-center>
       Tasks
-    </ion-list-header>
+    </ion-list-header> -->
 
+
+  <ion-item-sliding class="itemStyle" *ngFor="let task of taskList | async">
+    <ion-item>
+    <h2 class="headStyle">{{task.title}}</h2>
+    <p>{{task.content}}</p>
+    </ion-item>
+    <ion-item-options side="left" detail-push navPush="EditTaskPage" [navParams]="{task:task}">
+      <button text-capitalize ion-button color="header">
+        <ion-icon name="ios-create-outline"></ion-icon>
+        Edit
+      </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button (tap)="deleteTask(task, task.title)" text-capitalize ion-button color="danger">
+        <ion-icon name="ios-trash-outline"></ion-icon>
+        Delete
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+
+<!-- 
     <ion-item *ngFor="let task of taskList | async" 
     detail-push navPush="EditTaskPage" [navParams]="{task:task}">
       {{task.title}}
-    </ion-item>
+    </ion-item> -->
   </ion-list>
+
+
+  <ion-fab class="fixed-div" right bottom fab-fixed>
+    <button ion-fab color="header" navPush="AddTaskPage"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
 </ion-content>
